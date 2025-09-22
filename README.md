@@ -346,10 +346,6 @@ policystack repo update --force
 3. **"Connection timeout"** - Check network/proxy settings
 4. **"Invalid configuration"** - Reset config: `policystack config reset`
 
-## 🤝 Contributing
-
-Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
 ### Development Setup
 
 ```bash
@@ -380,11 +376,6 @@ pre-commit install
 ## 📄 License
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
-
-## 🏆 Credits
-
-- Asa Moore (@asamoorerh)
-
 ---
 
 **Need help?** Open an [issue](https://github.com/PolicyStack/cli/issues)
