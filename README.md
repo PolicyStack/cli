@@ -33,7 +33,7 @@ pip install -e .
 pip install -e ".[dev]"
 ```
 
-### From PyPI (Coming Soon)
+### From PyPI
 
 ```bash
 pip install policystack-cli
@@ -243,8 +243,6 @@ Features:
 
 Repositories are searched in priority order (lower number = higher priority).
 
-See [GIT_INTEGRATION.md](GIT_INTEGRATION.md) for detailed Git setup instructions.
-
 ## 🔧 Environment Variables
 
 - `POLICYSTACK_CONFIG` - Path to configuration file
@@ -366,7 +364,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 # Install in development mode with all dependencies
 pip install -e ".[dev]"
 
-# Run tests
+# Run tests - Will add soon
 pytest
 
 # Run linting
@@ -389,4 +387,4 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ---
 
-**Need help?** Check the [docs](https://docs.policystack.io/cli) | Open an [issue](https://github.com/PolicyStack/cli/issues)
+**Need help?** Open an [issue](https://github.com/PolicyStack/cli/issues)
