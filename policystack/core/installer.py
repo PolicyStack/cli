@@ -12,7 +12,6 @@ from rich.console import Console
 from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn
 
 from ..models import Template
-from ..utils.file_utils import safe_copy_tree
 from .git_repository import GitRepositoryHandler
 
 logger = logging.getLogger(__name__)
