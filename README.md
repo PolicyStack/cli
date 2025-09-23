@@ -364,9 +364,9 @@ pip install -e ".[dev]"
 pytest
 
 # Run linting
-black policystack/
-isort policystack/
-autoflake --remove-all-unused-imports --recursive --in-place policystack/
+black policystack tests
+isort policystack tests
+flake8 policystack tests
 mypy policystack
 
 # Install pre-commit hooks

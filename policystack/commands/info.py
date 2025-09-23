@@ -6,8 +6,10 @@ from typing import Optional
 
 import click
 from rich.console import Console
+from rich.markdown import Markdown
 from rich.panel import Panel
 from rich.table import Table
+from rich.tree import Tree
 
 
 @click.command()

@@ -9,7 +9,8 @@ from typing import Any, Dict, List, Optional, Tuple
 import httpx
 import yaml
 
-from ..models import Repository, RepositoryConfig, RepositoryType, Template
+from ..models import Repository, RepositoryConfig, RepositoryType, Template, TemplateMetadata
+from ..utils.file_utils import download_file, extract_archive, safe_path_join
 from .git_repository import GitRepositoryHandler
 from .registry import RegistryParser
 

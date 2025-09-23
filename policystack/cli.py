@@ -10,15 +10,7 @@ from rich.console import Console
 from rich.logging import RichHandler
 
 from .__version__ import __version__
-from .commands import (
-    config_cmd,
-    info_cmd,
-    init_cmd,
-    install_cmd,
-    repo_cmd,
-    search_cmd,
-    validate_cmd,
-)
+from .commands import config_cmd, info_cmd, install_cmd, repo_cmd, search_cmd
 from .config import Config
 from .core.marketplace import MarketplaceManager
 from .utils.console import setup_console
@@ -96,14 +88,6 @@ def cli(
         policystack install openshift-logging --version 1.1.0
 
     \b
-        # Initialize a new template
-        policystack init --name my-operator
-
-    \b
-        # Validate a template
-        policystack validate openshift-logging
-
-    \b
         # List configured repositories
         policystack repo list
 
@@ -117,7 +101,11 @@ def cli(
         level=log_level,
         format="%(message)s",
         datefmt="[%X]",
-        handlers=[RichHandler(console=console, rich_tracebacks=True)],
+        handlers=[RichHandler(
+            console=console, 
+            rich_tracebacks=debug,
+            show_path=debug,
+        )],
     )
 
     # Initialize context
@@ -149,8 +137,6 @@ def cli(
 cli.add_command(search_cmd.search)
 cli.add_command(info_cmd.info)
 cli.add_command(install_cmd.install)
-cli.add_command(init_cmd.init)
-cli.add_command(validate_cmd.validate)
 cli.add_command(repo_cmd.repo)
 cli.add_command(config_cmd.config)
 

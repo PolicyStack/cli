@@ -11,6 +11,7 @@ import click
 import yaml
 from rich.console import Console
 from rich.prompt import Confirm
+from rich.syntax import Syntax
 from rich.table import Table
 
 from ..models.config import ConfigModel
@@ -356,7 +357,7 @@ def export(ctx) -> None:
 
     # Export as YAML
     yaml_output = yaml.dump(
-        config.model_dump(exclude_none=True, mode="json"),
+        config.model_dump(exclude_none=True, mode='json'),
         default_flow_style=False,
         sort_keys=False,
     )

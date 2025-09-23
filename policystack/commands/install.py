@@ -7,8 +7,8 @@ from typing import Optional
 import click
 from rich.console import Console
 from rich.panel import Panel
-from rich.progress import Progress, SpinnerColumn, TextColumn
-from rich.prompt import Confirm
+from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn
+from rich.prompt import Confirm, Prompt
 
 from ..core.installer import TemplateInstaller
 from ..models import Template
