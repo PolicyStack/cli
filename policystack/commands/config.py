@@ -357,7 +357,7 @@ def export(ctx) -> None:
 
     # Export as YAML
     yaml_output = yaml.dump(
-        config.model_dump(exclude_none=True),
+        config.model_dump(exclude_none=True, mode='json'),
         default_flow_style=False,
         sort_keys=False,
     )

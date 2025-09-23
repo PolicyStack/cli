@@ -135,7 +135,7 @@ class Config:
 
         with open(self._config_path, "w") as f:
             yaml.dump(
-                self.config.model_dump(exclude_none=True),
+                self.config.model_dump(exclude_none=True, mode='json'),
                 f,
                 default_flow_style=False,
                 sort_keys=False,
