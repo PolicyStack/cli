@@ -101,7 +101,11 @@ def cli(
         level=log_level,
         format="%(message)s",
         datefmt="[%X]",
-        handlers=[RichHandler(console=console, rich_tracebacks=True)],
+        handlers=[RichHandler(
+            console=console, 
+            rich_tracebacks=debug,
+            show_path=debug,
+        )],
     )
 
     # Initialize context
