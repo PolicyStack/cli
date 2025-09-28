@@ -18,6 +18,7 @@ from .commands import (
     repo_cmd,
     search_cmd,
     validate_cmd,
+    upgrade_cmd,
 )
 from .config import Config
 from .core.marketplace import MarketplaceManager
@@ -153,6 +154,7 @@ cli.add_command(init_cmd.init)
 cli.add_command(validate_cmd.validate)
 cli.add_command(repo_cmd.repo)
 cli.add_command(config_cmd.config)
+cli.add_command(upgrade_cmd.upgrade)
 
 
 def main() -> None:

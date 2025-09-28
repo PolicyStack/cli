@@ -1,6 +1,6 @@
 """Template models for PolicyStack CLI."""
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from packaging import version as pkg_version
 from pydantic import BaseModel, Field, field_validator
@@ -37,6 +37,16 @@ class TemplateComplexity(BaseModel):
             raise ValueError(f"Skill level must be one of {valid_levels}")
         return v.lower()
 
+class UpgradeConstraints(BaseModel):
+    """Upgrade path constraints for a version."""
+
+    replaces: Optional[str] = Field(None, description="Version this directly replaces")
+    skips: List[str] = Field(default_factory=list, description="Versions that can be skipped")
+    blocks: List[str] = Field(default_factory=list, description="Versions that block upgrade to this")
+    requires_migration: bool = Field(False, description="Whether migration is required")
+    pre_upgrade_hook: Optional[str] = Field(None, description="Script to run before upgrade")
+    post_upgrade_hook: Optional[str] = Field(None, description="Script to run after upgrade")
+    minimum_policystack_cli: Optional[str] = Field(None, description="Minimum CLI version required")
 
 class TemplateVersionDetails(BaseModel):
     """Detailed version information."""
@@ -49,7 +59,32 @@ class TemplateVersionDetails(BaseModel):
     changes: List[str] = Field(default_factory=list, description="Changes in this version")
     breaking: bool = Field(False, description="Whether this version has breaking changes")
     migration: Optional[str] = Field(None, description="Migration instructions")
-
+    upgrade: Optional[UpgradeConstraints] = Field(None, description="Upgrade constraints")
+    deprecated_features: List[str] = Field(default_factory=list, description="Features deprecated in this version")
+    new_features: List[str] = Field(default_factory=list, description="New features in this version")
+    
+    def can_upgrade_from(self, from_version: str) -> Tuple[bool, str]:
+        """Check if upgrade from a version is allowed."""
+        if not self.upgrade:
+            return True, "No upgrade constraints defined"
+        
+        # Check if it's a direct replacement
+        if self.upgrade.replaces == from_version:
+            return True, "Direct upgrade path"
+        
+        # Check if version can be skipped
+        if from_version in self.upgrade.skips:
+            return True, "Version can be skipped"
+        
+        # Check if version blocks upgrade
+        if from_version in self.upgrade.blocks:
+            return False, f"Cannot upgrade directly from {from_version}. Please upgrade to an intermediate version first."
+        
+        # Check if we can reach this version through skips
+        if self.upgrade.replaces:
+            return False, f"Must upgrade from {self.upgrade.replaces} or versions in skip list"
+        
+        return True, "Upgrade allowed"
 
 class TemplateVersion(BaseModel):
     """Template version information."""

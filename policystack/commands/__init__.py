@@ -7,6 +7,7 @@ from . import install as install_cmd
 from . import repo as repo_cmd
 from . import search as search_cmd
 from . import validate as validate_cmd
+from . import upgrade as upgrade_cmd
 
 __all__ = [
     "config_cmd",
@@ -16,4 +17,5 @@ __all__ = [
     "repo_cmd",
     "search_cmd",
     "validate_cmd",
+    "upgrade_cmd",
 ]

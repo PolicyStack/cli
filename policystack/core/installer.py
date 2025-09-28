@@ -12,6 +12,7 @@ from rich.console import Console
 from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn
 
 from ..models import Template
+from ..core.change_detector import ChangeDetector
 from .git_repository import GitRepositoryHandler
 
 logger = logging.getLogger(__name__)
@@ -107,6 +108,8 @@ class TemplateInstaller:
                 # Copy examples directory for reference
                 self._install_examples(template_files, element_path)
 
+                detector = ChangeDetector(element_path)
+                baseline = detector.capture_baseline(version)
                 progress.update(task, description="Installation complete!", completed=4)
 
             return True
